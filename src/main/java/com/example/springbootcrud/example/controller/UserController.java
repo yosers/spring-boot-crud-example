@@ -1,6 +1,7 @@
 package com.example.springbootcrud.example.controller;
 
 import com.example.springbootcrud.example.entity.User;
+import com.example.springbootcrud.example.entity.UserDummy;
 import com.example.springbootcrud.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,28 @@ public class UserController {
 
     @GetMapping("/user/addUser")
     public String showForm (Model model) {
-        User user = new User();
+        UserDummy user = new UserDummy();
 
         model.addAttribute("user", user);
         return "createScreen";
     }
 
     @PostMapping("/user/addUser")
-    public String submitForm(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
+    public String submitForm(@ModelAttribute("user") UserDummy user) {
+        User users = new User();
+        users.setName(user.getName());
+        users.setHp(user.getHp());
+        users.setEmail(user.getEmail());
+
+        String listString = "";
+
+        for (String s : user.getAlamat())
+        {
+            listString += s + "\t";
+        }
+
+        users.setAlamat(listString);
+        userService.saveUser(users);
 
         return "redirect:/user";
     }
