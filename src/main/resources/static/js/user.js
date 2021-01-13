@@ -39,10 +39,10 @@ function validate() {
         document.myForm.email.focus();
         return false;
     }
-    if(document.myForm.alamat.value == "") {
+    if(document.myForm.p_scnt.value == "") {
         alert("Tolong di isi alamat!");
-        document.myForm.alamat.focus();
-
+        document.myForm.p_scnt.focus();
+        return false;
     }
     // var i=1;
     // $("h2").click(function(){
